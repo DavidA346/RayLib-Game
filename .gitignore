@@ -1,8 +1,10 @@
-/CMakeCache.txt
-/CMakeFiles/
-/Makefile.cmake
-/cmake_install.cmake
-/Makefile
-/progress.marks
+/build/
 /gameApp
-/cmake_check_cache
+/CMakeFiles/
+/Makefile
+/CMakeCache.txt
+/cmake_install.cmake
+/progress.marks
+/Makefile.cmake
+/CMakeConfigureLog.yaml
+.DS_Store
