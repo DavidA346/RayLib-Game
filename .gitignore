@@ -1,3 +1,8 @@
-cmake_install.cmake
-gameApp
-play
+/CMakeCache.txt
+/CMakeFiles/
+/Makefile.cmake
+/cmake_install.cmake
+/Makefile
+/progress.marks
+/gameApp
+/cmake_check_cache
