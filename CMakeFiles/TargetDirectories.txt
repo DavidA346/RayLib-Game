@@ -1,3 +1,0 @@
-/Users/davidaispuro/rayLibGame/CMakeFiles/gameApp.dir
-/Users/davidaispuro/rayLibGame/CMakeFiles/edit_cache.dir
-/Users/davidaispuro/rayLibGame/CMakeFiles/rebuild_cache.dir
