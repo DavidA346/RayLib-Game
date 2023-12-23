@@ -19,8 +19,15 @@ void Ball::ballMovement(){
         ySpeed *= -1;
     }
 
-    if (x + radius >= GetScreenWidth() || x - radius <= 0){
-        xSpeed *= -1;
+    //Resets the ball and increases the score
+    if (x + radius >= GetScreenWidth()){
+        ++scoreLeft;
+        reset();
+    }
+
+    if (x - radius <= 0){
+        ++scoreRight;
+        reset();
     }
 }
 
@@ -33,4 +40,22 @@ void Ball::checkCollision(const Paddle& paddle){
     if (CheckCollisionCircleRec(Vector2{static_cast<float>(x), static_cast<float>(y)}, radius, paddleRect)) {
         xSpeed *= -1;
     }
+}
+
+//Resets the ball in the middle and moves randomly
+void Ball::reset(){
+    x = GetScreenWidth() / 2;
+    y = GetScreenHeight() / 2;
+
+    int resetSpeed[2] = {-1, 1};
+    xSpeed *= resetSpeed[GetRandomValue(0, 1)];
+    ySpeed *= resetSpeed[GetRandomValue(0, 1)];
+}
+
+int Ball::getScoreLeft() const{
+    return scoreLeft;
+}
+
+int Ball::getScoreRight() const{
+    return scoreRight;
 }

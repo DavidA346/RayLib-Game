@@ -23,7 +23,7 @@ int main(){
         BeginDrawing();
 
             ClearBackground(BLACK);
-
+            
             pongBall->ballMovement();
             paddleRight->movePaddle(KEY_UP, KEY_DOWN);
             paddleLeft->movePaddle(KEY_W, KEY_S);
@@ -34,8 +34,9 @@ int main(){
             pongBall->drawBall();
             paddleRight->drawPaddle();
             paddleLeft->drawPaddle();
-
-
+            DrawText(TextFormat("%i", pongBall->getScoreLeft()), (screenWidth / 4) - 20 / 2, 20, 80, WHITE);
+            DrawText(TextFormat("%i", pongBall->getScoreRight()), 3 * (screenWidth / 4) - 20, 20, 80, WHITE);
+            
         EndDrawing();
         //----------------------------------------------------------------------------------
     }
@@ -45,5 +46,9 @@ int main(){
     CloseWindow();        // Close window and OpenGL context
     //--------------------------------------------------------------------------------------
 
+    delete pongBall;
+    delete paddleLeft;
+    delete paddleRight;
+    
     return 0;
 }
