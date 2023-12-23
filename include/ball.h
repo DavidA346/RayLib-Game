@@ -12,6 +12,8 @@ class Ball{
    Color color;
    int xSpeed;
    int ySpeed;
+   int scoreLeft = 0;
+   int scoreRight = 0;
 
  public:
    Ball(int x, int y, int radius, Color color);
@@ -21,6 +23,12 @@ class Ball{
    void ballMovement();
 
    void checkCollision(const Paddle& paddle);
+
+   void reset();
+
+   int getScoreLeft() const;
+
+   int getScoreRight() const;
 };
 
 #endif
