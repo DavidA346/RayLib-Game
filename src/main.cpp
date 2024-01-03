@@ -36,6 +36,21 @@ int main(){
             pongBall->checkCollision(*paddleLeft);
             pongBall->checkCollision(*paddleRight);
 
+            //Right Goal
+            DrawRectangle(0, 24, 30, 402, WHITE);
+            
+            DrawText("G", 5, 160, 30, BLACK);
+            DrawText("O", 5, 195, 30, BLACK);
+            DrawText("A", 5, 230, 30, BLACK);
+            DrawText("L", 5, 265, 30, BLACK);
+
+            //Left Goal
+            DrawRectangle(770, 24, 30, 402, WHITE);
+            DrawText("G", 775, 160, 30, BLACK);
+            DrawText("O", 775, 195, 30, BLACK);
+            DrawText("A", 775, 230, 30, BLACK);
+            DrawText("L", 775, 265, 30, BLACK);
+
             pongBall->drawBall();
             paddleRight->drawPaddle();
             paddleLeft->drawPaddle();

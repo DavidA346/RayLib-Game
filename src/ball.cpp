@@ -20,12 +20,12 @@ void Ball::ballMovement(){
     }
 
     //Resets the ball and increases the score
-    if (x + radius >= GetScreenWidth()){
+    if (x + radius >= 770){
         ++scoreLeft;
         reset();
     }
 
-    if (x - radius <= 0){
+    if (x - radius <= 30){
         ++scoreRight;
         reset();
     }
