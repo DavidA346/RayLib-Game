@@ -1,4 +1,5 @@
 Soccer Pong Game using raylib
+
 Welcome to Soccer Pong, an exciting blend of classic Pong gameplay with a soccer twist. This game, developed using the raylib library, promises an engaging and competitive experience. Soccer Pong features two goalies, a soccer ball, and a vibrant soccer field background. I created this game as a way to stregnthen my C++ skills as well create a fun new project using raylib. I love soccer and have played it ever since a child, so I decided to add it to my game. This was a lot of fun to and has taught me a lot about coding. Some future additions I would like to make are things such: addind music, creating clickable buttons, and different options for choosing a custom player.
 
 Game Overview
