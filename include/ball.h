@@ -30,6 +30,9 @@ class Ball{
    int getScoreLeft() const;
 
    int getScoreRight() const;
+
+   void resetScore();
+   
 };
 
 #endif

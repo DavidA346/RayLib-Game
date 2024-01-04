@@ -2,6 +2,7 @@
 #include "ball.h"
 #include "goalie.h"
 
+//Sets the state of the current game
 enum GameState{
     MENU,
     IN_PROGRESS,
@@ -15,14 +16,19 @@ int main(){
     const int screenHeight = 450;
 
     InitWindow(screenWidth, screenHeight, "Soccer Pong");
-    Texture2D backgroundTexture = LoadTexture("include/soccer_field.png");
-    //Texture2D mainMenuTexture = LoadTexture("include/main_menu.png");
 
-    Ball* pongBall = new Ball(screenWidth / 2, screenHeight / 2, 5, WHITE);
+    //Initializes both textures
+    Texture2D backgroundTexture = LoadTexture("include/soccer_field.png");
+    Texture2D mainMenuTexture = LoadTexture("include/main_menu.png");
+
+    //Initializes the ball and goalies
+    Ball* soccerBall = new Ball(screenWidth / 2, screenHeight / 2, 5, WHITE);
     Goalie* goalieLeft = new Goalie(40, screenHeight / 2 - 70 / 2, 45, 76, WHITE, true);
     Goalie* goalieRight = new Goalie(715, screenHeight / 2 - 70 / 2, 45, 76, WHITE, false);
 
-    GameState game= IN_PROGRESS;
+    //Initialize the state to MENU
+    GameState game= MENU;
+    //Used for deciding winner
     bool isBlue = true;
 
     SetTargetFPS(120);               // Set our game to run at 120 frames-per-second
@@ -34,19 +40,22 @@ int main(){
         //----------------------------------------------------------------------------------
         BeginDrawing();
 
-            // if (game == MENU){
-            //     ClearBackground(WHITE);
-            //     DrawText("SOCCER PONG", screenWidth / 4, 50, 50, BLACK);
-            //     DrawTexture(mainMenuTexture, screenWidth / 3 + 20, 100, WHITE);
-            //     DrawRectangle(screenWidth / 3, 250, 250, 50, BLACK);
-            //     DrawText("Press Enter", screenWidth / 3 + 26, 250, 30, WHITE);
+            //Menu State
+            if (game == MENU){
+                //Loads Main Menu Texture
+                ClearBackground(WHITE);
+                DrawTexture(mainMenuTexture, 0, 0, WHITE);
+                DrawText("Press Enter", screenWidth / 3 + 42, 350, 30, WHITE);
 
-            //     if (IsKeyPressed(KEY_ENTER)){
-            //         game = IN_PROGRESS;
-            //     }
-            // }
+                //Switches state when Enter is pressed
+                if (IsKeyPressed(KEY_ENTER)){
+                    game = IN_PROGRESS;
+                }
+            }
 
+            //IN_PROGRESS State
             if (game == IN_PROGRESS){
+                //Loads Field Background
                 ClearBackground(WHITE);
                 DrawTexture(backgroundTexture, 0, 0, WHITE);
 
@@ -65,37 +74,63 @@ int main(){
                 DrawText("A", 775, 230, 30, BLACK);
                 DrawText("L", 775, 265, 30, BLACK);
 
-                pongBall->drawBall();
+                //Draws ball and goalies to screen
+                soccerBall->drawBall();
                 goalieRight->drawGoalie();
                 goalieLeft->drawGoalie();
 
-                DrawText(TextFormat("%i", pongBall->getScoreLeft()), (screenWidth / 4) - 20 / 2, 30, 80, WHITE);
-                DrawText(TextFormat("%i", pongBall->getScoreRight()), 3 * (screenWidth / 4) - 20, 30, 80, WHITE);
-                    pongBall->ballMovement();
-                    goalieRight->moveGoalie(KEY_UP, KEY_DOWN);
-                    goalieLeft->moveGoalie(KEY_W, KEY_S);
-                    pongBall->checkCollision(*goalieLeft);
-                    pongBall->checkCollision(*goalieRight);
+                //Draws scores to screen
+                DrawText(TextFormat("%i", soccerBall->getScoreLeft()), (screenWidth / 4) - 20 / 2, 30, 80, WHITE);
+                DrawText(TextFormat("%i", soccerBall->getScoreRight()), 3 * (screenWidth / 4) - 20, 30, 80, WHITE);
 
+                //Allows for movement and collisions
+                soccerBall->ballMovement();
+                goalieRight->moveGoalie(KEY_UP, KEY_DOWN);
+                goalieLeft->moveGoalie(KEY_W, KEY_S);
+                soccerBall->checkCollision(*goalieLeft);
+                soccerBall->checkCollision(*goalieRight);
 
-                    if (pongBall->getScoreLeft() == 1) {
-                        isBlue = true;
-                        game = WINNER;
-                    }
-                    else if (pongBall->getScoreRight() == 1){
-                        isBlue = false;
-                        game = WINNER;
-                    }
+                //Checks if player has one and changes to WINNER state
+                if (soccerBall->getScoreLeft() == 5) {
+                    isBlue = true;
+                    game = WINNER;
                 }
 
+                else if (soccerBall->getScoreRight() == 5){
+                    isBlue = false;
+                    game = WINNER;
+                }
+            }
+
+            //WINNER state
             else if (game == WINNER){
-                ClearBackground(WHITE);
+                ClearBackground(BLACK);
+
+                //A winner screen is shown to the user depending on which color won and is asked to play again or quit
                 if (isBlue){
                     DrawText("BLUE IS THE WINNER", screenWidth / 6, screenHeight / 2 - 100, 50, BLUE);
+                    DrawText("Press 'Enter' to Play Again", screenWidth / 3, screenHeight / 2, 20, WHITE);
+                    DrawText("Press 'Q' to Quit", screenWidth / 3 + 48, screenHeight / 2 + 100, 20, WHITE);
+                    if (IsKeyDown(KEY_ENTER)){
+                        soccerBall->resetScore();
+                        game = MENU;
+                    }
+                    else if (IsKeyDown(KEY_Q)){
+                        break;
+                    }
                 }
 
                 else{
                     DrawText("RED IS THE WINNER", screenWidth / 6, screenHeight / 2 - 100, 50, RED);
+                    DrawText("Press 'Enter' to Play Again", screenWidth / 3, screenHeight / 2, 20, WHITE);
+                    DrawText("Press 'Q' to Quit", screenWidth / 3 + 48, screenHeight / 2 + 100, 20, WHITE);
+                    if (IsKeyDown(KEY_ENTER)){
+                        soccerBall->resetScore();
+                        game = MENU;
+                    }
+                    else if (IsKeyDown(KEY_Q)){
+                        break;
+                    }
                 }
             }
       
@@ -106,10 +141,12 @@ int main(){
     // De-Initialization
     //--------------------------------------------------------------------------------------
     UnloadTexture(backgroundTexture);
+    UnloadTexture(mainMenuTexture);
     CloseWindow();        // Close window and OpenGL context
     //--------------------------------------------------------------------------------------
 
-    delete pongBall;
+    //Frees objects created
+    delete soccerBall;
     delete goalieLeft;
     delete goalieRight;
     
