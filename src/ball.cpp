@@ -2,6 +2,7 @@
 
 //Initializes a Ball
 Ball::Ball(int x, int y, int radius, Color color) : x(x), y(y), radius(radius), color(color), xSpeed(3), ySpeed(3) {
+    //Initializes soccer ball texture
     soccerBallTexture = LoadTexture("include/soccer_ball.png");
 }
 
@@ -33,9 +34,9 @@ void Ball::ballMovement(){
     }
 }
 
-//Checks for collion with paddles
+//Checks for collion with goalies
 void Ball::checkCollision(const Goalie& goalie){
-    //Create a Rectangle for the paddle
+    //Create a Rectangle for the goalie
     Rectangle goalieRect = {static_cast<float>(goalie.getX()), static_cast<float>(goalie.getY()), static_cast<float>(goalie.getWidth()), static_cast<float>(goalie.getHeight())};
 
     //If collision occurs then ball is moved accordinly
@@ -61,4 +62,9 @@ int Ball::getScoreLeft() const{
 
 int Ball::getScoreRight() const{
     return scoreRight;
+}
+
+void Ball::resetScore(){
+    scoreLeft = 0;
+    scoreRight = 0;
 }

@@ -2,6 +2,7 @@
 
 //Initializes a paddle
 Goalie::Goalie(int x, int y, int width, int height, Color color, bool isLeft) : x(x), y(y), width(width), height(height), color(color), speed(3), isLeft(isLeft) {
+    //Initializes both textures
     if (isLeft){
         leftGoalieTexture = LoadTexture("include/blue_goalie.png");
     }
@@ -10,18 +11,18 @@ Goalie::Goalie(int x, int y, int width, int height, Color color, bool isLeft) : 
     }
 }
 
-//Draws a paddle to the screen
+//Draws both goalies to the screen
 void Goalie::drawGoalie() const{
     DrawTexture(leftGoalieTexture, x, y, WHITE);
     DrawTexture(rightGoalieTexture, x, y, WHITE);
 }
 
-//Sets the speed of the paddle
+//Sets the speed of the goalies
 void Goalie::setSpeed(int speed){
     this->speed = speed;
 }
 
-//Allows for paddle to move
+//Allows for goalies to move
 void Goalie::moveGoalie(int keyUp, int keyDown){
     if (IsKeyDown(keyUp)){
         y -= speed;
@@ -31,7 +32,7 @@ void Goalie::moveGoalie(int keyUp, int keyDown){
         y += speed;
     }
 
-    //Contains paddle inside of the screen
+    //Contains goalie inside of the screen
     if (y + height >= GetScreenHeight()){
         y = GetScreenHeight() - height;
     }
