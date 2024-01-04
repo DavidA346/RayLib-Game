@@ -1,11 +1,13 @@
 #include "ball.h"
 
 //Initializes a Ball
-Ball::Ball(int x, int y, int radius, Color color) : x(x), y(y), radius(radius), color(color), xSpeed(2), ySpeed(2) {}
+Ball::Ball(int x, int y, int radius, Color color) : x(x), y(y), radius(radius), color(color), xSpeed(3), ySpeed(3) {
+    soccerBallTexture = LoadTexture("include/soccer_ball.png");
+}
 
 //Draws a ball to the screen
 void Ball::drawBall() const{
-    DrawCircle(x, y, radius, color);
+    DrawTexture(soccerBallTexture, x - radius, y - radius, WHITE);
 }
 
 //Allows the ball to move
@@ -32,12 +34,12 @@ void Ball::ballMovement(){
 }
 
 //Checks for collion with paddles
-void Ball::checkCollision(const Paddle& paddle){
+void Ball::checkCollision(const Goalie& goalie){
     //Create a Rectangle for the paddle
-    Rectangle paddleRect = {static_cast<float>(paddle.getX()), static_cast<float>(paddle.getY()), static_cast<float>(paddle.getWidth()), static_cast<float>(paddle.getHeight())};
+    Rectangle goalieRect = {static_cast<float>(goalie.getX()), static_cast<float>(goalie.getY()), static_cast<float>(goalie.getWidth()), static_cast<float>(goalie.getHeight())};
 
     //If collision occurs then ball is moved accordinly
-    if (CheckCollisionCircleRec(Vector2{static_cast<float>(x), static_cast<float>(y)}, radius, paddleRect)) {
+    if (CheckCollisionCircleRec(Vector2{static_cast<float>(x), static_cast<float>(y)}, radius, goalieRect)) {
         xSpeed *= -1;
     }
 }
@@ -47,6 +49,7 @@ void Ball::reset(){
     x = GetScreenWidth() / 2;
     y = GetScreenHeight() / 2;
 
+    WaitTime(0.3);
     int resetSpeed[2] = {-1, 1};
     xSpeed *= resetSpeed[GetRandomValue(0, 1)];
     ySpeed *= resetSpeed[GetRandomValue(0, 1)];

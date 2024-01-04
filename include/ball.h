@@ -2,7 +2,7 @@
 #define _BALL_H_
 
 #include "raylib.h"
-#include "paddle.h"
+#include "goalie.h"
 
 class Ball{
  private:
@@ -14,6 +14,7 @@ class Ball{
    int ySpeed;
    int scoreLeft = 0;
    int scoreRight = 0;
+   Texture2D soccerBallTexture;
 
  public:
    Ball(int x, int y, int radius, Color color);
@@ -22,7 +23,7 @@ class Ball{
 
    void ballMovement();
 
-   void checkCollision(const Paddle& paddle);
+   void checkCollision(const Goalie& goalie);
 
    void reset();
 
