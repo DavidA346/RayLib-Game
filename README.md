@@ -48,3 +48,10 @@
   * Compile the code using your preferred compiler, ensuring proper library linkage.
   * Run the compiled executable.
   * Enjoy the fast-paced and thrilling experience of Soccer Pong! Feel free to contribute, report issues, or suggest improvements. Happy gaming!
+
+## Screenshots
+![Main Menu][<img width="798" alt="Screenshot 2024-01-03 at 6 06 55 PM" src="https://github.com/DavidA346/RayLib-Game/assets/146288942/69129657-1b91-48c8-bc00-669d2b8c5ede">]
+
+![Game Screen][<img width="800" alt="Screenshot 2024-01-03 at 6 07 04 PM" src="https://github.com/DavidA346/RayLib-Game/assets/146288942/93c0f987-f6fd-4269-8895-87b11f39083a">]
+
+![Winner Screen][<img width="798" alt="Screenshot 2024-01-03 at 6 07 14 PM" src="https://github.com/DavidA346/RayLib-Game/assets/146288942/53e50c71-71af-4408-8aeb-ac31a7cdad4c">]
